@@ -1,0 +1,39 @@
+<div class="project_tasks_content">
+  <div class = "project_block">
+  	<%= image_tag (src="project.gif"), :class => "project_block_image" %>
+  	<span class = "project_name"><%= project.name %></span>
+  	<input class = "project_input_text" type = "text" update-project-path="<%= project_path(project) %>">
+  	<input class = "project_input_button" type = "button" value = "OK">
+    <%= link_to image_tag("delete_project.gif", :border => 0, :class => "delete_project_image"), project_path(project), method: :delete,  remote: true, class: "delete_project" %>
+  	<a class = "edit-project" href=''><img alt='2' border='0' class='edit_project_image' src='/assets/edit_project.gif'></a>
+  </div>
+ 	<div class = "add_task_block">
+ 		<%= image_tag (src="task_image.gif"), :class => "add_task_block_image" %>
+    <input class = "add_task_input_text" type = "text" placeholder = "Start typing here to create a task..." data-project-tasks-path="<%= project_tasks_path(project) %>">
+    <input class = 'project_input_date' type = 'date'>
+ 		<a class = "add_task_a" href="">Add Task</a>
+ 	</div> 
+  <ul class = "task_list" path = "/projects/<%= project.id %>/tasks/sort">
+    <% project.tasks.each do |task| %>
+ 	    <li class="li_task" id="<%= task.id %>">
+        <div class = "task_block">
+          <div class = "task_status_block"> 
+            <%= check_box_tag "", "", task.status, class: "task_check_box" %>
+          </div>
+		      <div class = "task_name_deadline">
+            <span class = "task_name"><%= task.name %></span>
+            <span class = "task_span">deadline:</span>
+            <span class = "task_deadline"><%= task.deadline %></span>
+            <input class = "task_input_text" type = "text" update-project-task-path="<%= project_task_path(task.project, task) %>">
+            <input class = "task_input_date" type = "date">
+            <input class = "task_input_button" type = "button" value = "OK">
+          </div>
+		      <div class = "task_image_block">
+			      <%= link_to image_tag("delete_task.gif", :border => 0, :class => "delete_task_image"), [task.project, task], method: :delete, class: 'delete_task', remote: true %>
+            <%= link_to image_tag("edit_task.gif", :border => 0, :class => "edit_task_image"), project_task_path(task.project, task), method: :get, class: 'edit_task' %>
+		      </div>
+	      </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

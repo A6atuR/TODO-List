@@ -1,0 +1,23 @@
+<div class = "container">
+  <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+	<h2 class = "h2">SIMPLE TODO LISTS</h2>
+  <h3 class = "h3">FROM RUBY GARAGE</h3>
+  <div class = "project_tasks">
+  	<% @projects.each do |project| %>
+      <%= render project %>
+  	<% end %>
+  </div>
+  <a class="add_todo_list_a" href=""><%= image_tag (src="add_todo_list.gif"), :class => "add_todo_list_image" %><span class="add_todo_list_span">Add TODO List</span></a>
+  <div class="create_project">
+    <%= form_for(@project, remote: true) do |f| %>
+      <div class = "devise_block">
+        <%= f.label :name, :class => "label" %>
+        <%= f.text_field :name, :class => "email_field" %>
+      </div>
+      <div>
+        <%= f.submit "Create project", :class => "button" %>
+      </div>
+    <% end %>
+  </div>
+  <h5 class = "h5">&copy;Ruby Garage</h5>   
+</div>
