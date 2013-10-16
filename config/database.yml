@@ -12,6 +12,15 @@ development:
   username: postgres
   password: root
 
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: todolist_test
+  pool: 5
+  host: localhost
+  username: postgres
+  password: root
+
 test:
   adapter: postgresql
   encoding: unicode
